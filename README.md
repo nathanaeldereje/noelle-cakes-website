@@ -55,7 +55,11 @@ To run this project locally:
    ```bash
    npm run dev
    ```
-
+## 🗄️ Database Setup
+This project uses Supabase (PostgreSQL). If you are setting up a fresh instance of this project, you can easily replicate the database architecture. 
+1. Create a new Supabase project.
+2. Open the Supabase SQL Editor.
+3. Copy the contents of `database/schema.sql` and run it to instantly generate the required tables, Row-Level Security (RLS) policies, and role permissions.
 ## 🗺 Roadmap / Build Phases
 - [x] **Phase 1:** Confirm Brand Direction & Layout
 - [x] **Phase 2:** Set up Supabase project (Auth, DB, Storage)
