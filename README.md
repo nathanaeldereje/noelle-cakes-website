@@ -43,12 +43,13 @@ To run this project locally:
    npm install
    ```
 
+
 3. **Set up Environment Variables:**
-   *Create a `.env` file in the root directory and add your Supabase keys:*
-   ```env
-   VITE_SUPABASE_URL=your_supabase_url
-   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   *Copy the provided example file to create your local environment file:*
+   ```bash
+   cp .env.example .env
    ```
+   *Open `.env` and replace the placeholder values with your Supabase Project URL and Anon Key.*
 
 4. **Start the development server:**
    ```bash
@@ -57,7 +58,7 @@ To run this project locally:
 
 ## 🗺 Roadmap / Build Phases
 - [x] **Phase 1:** Confirm Brand Direction & Layout
-- [ ] **Phase 2:** Set up Supabase project (Auth, DB, Storage)
+- [x] **Phase 2:** Set up Supabase project (Auth, DB, Storage)
 - [ ] **Phase 3:** Build public site against placeholder data
 - [ ] **Phase 4:** Build Admin Panel & CRUD operations
 - [ ] **Phase 5:** Wire public site to live Supabase data
