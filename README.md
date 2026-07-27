@@ -63,4 +63,3 @@ To run this project locally:
 - [ ] **Phase 5:** Wire public site to live Supabase data
 - [ ] **Phase 6:** Deploy & Connect Domain
 - [ ] **Phase 7:** Client Handoff
-```
