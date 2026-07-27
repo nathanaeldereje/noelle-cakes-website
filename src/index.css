@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+/* --- IMPORT LOCAL FONTS --- */
+@font-face {
+  font-family: "Happy Lucky";
+  src: url('./assets/fonts/HappyLucky.ttf') format('truetype'); 
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; 
+}
+
+@font-face {
+  font-family: "Gabriola";
+  src: url('./assets/fonts/Gabriola.ttf') format('truetype'); 
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Quicksand";
+  src: url("./assets/Quicksand.ttf") format("truetype");
+  font-weight: 300 700;
+  font-style: normal;
+}
+
+/* --- TAILWIND V4 THEME --- */
+@theme {
+  --color-brand-maroon: #65001E;
+  --color-brand-pink: #FFEBEB;
+  --color-brand-body: #2B2B2B;
+  --color-brand-muted: #8A6E6E;
+  --color-brand-accent: #D4A24C;
+  --color-brand-divider: #E8D6D6;
+
+  --font-heading: "Happy Lucky", cursive;
+  --font-accent: "Gabriola", serif;
+  --font-body: "Quicksand", sans-serif;
+}
+
