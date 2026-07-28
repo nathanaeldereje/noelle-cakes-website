@@ -41,6 +41,7 @@ export default function HeroSection() {
             alt="TODO: some random image of a cake or pastry"
             className="w-full h-full object-cover"
             loading="eager"
+            fetchpriority="high"
           />
         </div>
 

@@ -22,6 +22,8 @@
   src: url("./assets/fonts/Quicksand.ttf") format("truetype");
   font-weight: 300 700;
   font-style: normal;
+  font-display: swap;
+
 }
 
 /* --- TAILWIND V4 THEME --- */
