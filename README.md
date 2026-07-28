@@ -64,7 +64,7 @@ This project uses Supabase (PostgreSQL). If you are setting up a fresh instance 
 - [x] **Phase 1:** Confirm Brand Direction & Layout
 - [x] **Phase 2:** Set up Supabase project (Auth, DB, Storage)
 - [x] **Phase 3:** Build public site against placeholder data
-- [ ] **Phase 4:** Build Admin Panel & CRUD operations
+- [x] **Phase 4:** Build Admin Panel & CRUD operations
 - [ ] **Phase 5:** Wire public site to live Supabase data
 - [ ] **Phase 6:** Deploy & Connect Domain
 - [ ] **Phase 7:** Client Handoff
