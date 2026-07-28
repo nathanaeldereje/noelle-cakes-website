@@ -24,7 +24,7 @@ export default function CategoriesSection({ categories }) {
             >
               <div className="relative h-52 overflow-hidden">
                 <img 
-                  src={category.image} 
+                  src={category.image_url || category.image || 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&q=80&w=800'} 
                   alt={category.name} 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"

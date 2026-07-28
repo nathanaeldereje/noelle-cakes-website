@@ -1,17 +1,59 @@
-// src\pages\CategoryPage.jsx
+import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { mockCategories, mockMenuItems } from '../data/mockData';
+import { supabase } from '../lib/supabase';
 
 export default function CategoryPage() {
-  const { category } = useParams();
+  const { category: categoryId } = useParams();
 
-  // Find category details and items
-  const categoryDetails = mockCategories.find(c => c.id === category);
-  const items = mockMenuItems.filter(item => item.category_id === category);
+  const [categories, setCategories] = useState([]);
+  const [currentCategory, setCurrentCategory] = useState(null);
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  if (!categoryDetails) {
+  useEffect(() => {
+    async function fetchCategoryData() {
+      setLoading(true);
+
+      // 1. Fetch all categories for navigation tabs
+      const { data: catData } = await supabase
+        .from('categories')
+        .select('*')
+        .order('display_order', { ascending: true });
+
+      setCategories(catData || []);
+
+      // 2. Find current category object
+      const foundCategory = catData?.find(c => c.id === categoryId);
+      setCurrentCategory(foundCategory || null);
+
+      // 3. Fetch items belonging to this category
+      if (categoryId) {
+        const { data: itemData } = await supabase
+          .from('menu_items')
+          .select('*')
+          .eq('category_id', categoryId)
+          .order('name', { ascending: true });
+
+        setItems(itemData || []);
+      }
+
+      setLoading(false);
+    }
+
+    fetchCategoryData();
+  }, [categoryId]);
+
+  if (loading) {
     return (
-      <div className="max-w-7xl mx-auto px-4 py-20 text-center">
+      <div className="min-h-[70vh] flex items-center justify-center font-body text-brand-maroon">
+        <div className="animate-pulse text-lg font-semibold">Loading Menu Category...</div>
+      </div>
+    );
+  }
+
+  if (!currentCategory) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-20 text-center font-body">
         <h1 className="font-heading text-4xl text-brand-maroon mb-4">Category Not Found</h1>
         <Link to="/" className="text-brand-maroon underline font-semibold">Return Home</Link>
       </div>
@@ -23,12 +65,12 @@ export default function CategoryPage() {
       
       {/* Category Navigation Bar / Tabs */}
       <div className="flex flex-wrap items-center justify-center gap-3 border-b border-brand-divider pb-6">
-        {mockCategories.map((cat) => (
+        {categories.map((cat) => (
           <Link
             key={cat.id}
             to={`/menu/${cat.id}`}
             className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
-              cat.id === category
+              cat.id === categoryId
                 ? 'bg-brand-maroon text-brand-pink shadow-md'
                 : 'bg-brand-pink text-brand-maroon hover:bg-brand-divider'
             }`}
@@ -41,16 +83,16 @@ export default function CategoryPage() {
       {/* Category Header */}
       <div className="text-center space-y-3 max-w-2xl mx-auto">
         <h1 className="font-heading text-5xl text-brand-maroon capitalize">
-          {categoryDetails.name}
+          {currentCategory.name}
         </h1>
-        <p className="text-brand-muted text-base">
-          {categoryDetails.description}
-        </p>
       </div>
 
       {/* Items Box Grid */}
       {items.length === 0 ? (
-        <p className="text-center text-brand-muted py-12">No items found in this category yet.</p>
+        <div className="text-center text-brand-muted py-16 bg-brand-pink/30 rounded-2xl border border-brand-divider">
+          <p className="text-lg font-semibold text-brand-maroon mb-1">No items in this category yet!</p>
+          <p className="text-sm">Check back soon or check out our other categories.</p>
+        </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {items.map((item) => (
@@ -59,13 +101,17 @@ export default function CategoryPage() {
               className="bg-white rounded-xl overflow-hidden border border-brand-divider shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between group"
             >
               <div>
-                <div className="relative h-56 overflow-hidden">
-                  <img 
-                    src={item.image_url} 
-                    alt={item.name} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
+                <div className="relative h-56 overflow-hidden bg-brand-pink/20">
+                  {item.image_url ? (
+                    <img 
+                      src={item.image_url} 
+                      alt={item.name} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-brand-muted text-sm">No Photo Available</div>
+                  )}
                   {item.is_special && (
                     <span className="absolute top-3 left-3 bg-brand-accent text-white text-xs font-bold uppercase px-2.5 py-1 rounded shadow">
                       Today's Special
@@ -85,7 +131,7 @@ export default function CategoryPage() {
                       What's Inside:
                     </span>
                     <p className="text-brand-body/90 text-sm leading-relaxed line-clamp-3">
-                      {item.description}
+                      {item.description || 'Delicately made with authentic bakery ingredients.'}
                     </p>
                   </div>
                 </div>
@@ -93,7 +139,7 @@ export default function CategoryPage() {
 
               <div className="p-6 pt-0">
                 <Link 
-                  to={`/menu/${category}/${item.id}`}
+                  to={`/menu/${categoryId}/${item.id}`}
                   className="block w-full text-center bg-brand-pink text-brand-maroon hover:bg-brand-maroon hover:text-brand-pink font-semibold py-2.5 rounded-lg transition-colors text-sm border border-brand-divider"
                 >
                   View Item Details

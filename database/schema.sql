@@ -3,10 +3,13 @@
 -- ==========================================
 
 -- 1. Create Categories Table
+-- 1. Create Categories Table (Updated with description & image_url)
 CREATE TABLE public.categories (
   id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
   name text NOT NULL,
-  display_order integer DEFAULT 0
+  display_order integer DEFAULT 0,
+  description text,
+  image_url text
 );
 
 -- 2. Create Menu Items Table
