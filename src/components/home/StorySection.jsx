@@ -1,10 +1,11 @@
+import about_image from '../../assets/about_us.webp';
 export default function StorySection() {
   return (
     <section id="story" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 scroll-mt-24">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div className="rounded-xl overflow-hidden shadow-lg border border-brand-divider aspect-square max-w-md mx-auto md:max-w-none w-full">
           <img 
-            src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&q=80&w=800" 
+            src={about_image} 
             alt="Us baking in kitchen"
             className="w-full h-full object-cover"
             loading="lazy"

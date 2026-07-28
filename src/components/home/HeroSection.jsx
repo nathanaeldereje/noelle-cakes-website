@@ -1,3 +1,5 @@
+import hero_image from '../../assets/hero.webp';
+
 export default function HeroSection() {
   return (
     <section id="home" className="relative bg-brand-pink py-16 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-24">
@@ -35,7 +37,7 @@ export default function HeroSection() {
 
         <div className="rounded-xl overflow-hidden shadow-lg border border-brand-divider aspect-4/3 max-w-md mx-auto lg:max-w-none w-full">
           <img 
-            src="https://plus.unsplash.com/premium_photo-1733317219908-fb18297bdc4d?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+            src={hero_image} 
             alt="TODO: some random image of a cake or pastry"
             className="w-full h-full object-cover"
             loading="eager"
