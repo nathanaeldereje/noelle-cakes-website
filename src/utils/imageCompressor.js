@@ -6,7 +6,7 @@
  * @param {number} quality - WebP quality 0 to 1 (default 0.8)
  * @returns {Promise<File>} Compressed WebP file
  */
-export async function compressImage(file, maxWidth = 1000, maxHeight = 1000, quality = 0.8) {
+export async function compressImage(file, maxWidth = 800, maxHeight = 800, quality = 0.75) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);

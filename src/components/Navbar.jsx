@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import logo from '../assets/noelle_red.png';
+import logo from '../assets/final.svg';
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -33,14 +33,14 @@ export default function Navbar() {
           
           {/* Logo / Brand Name */}
           <Link to="/" className="flex items-center space-x-3">
-            <img
+            {/* <img
               src={logo}
               alt="Noelle Cakes Logo"
               className="h-20 w-20 object-contain"
-            />
-            {/* <span className="font-heading text-3xl sm:text-4xl text-brand-maroon tracking-wide">
-              Noelle
-            </span> */}
+            /> */}
+            <span className="font-accent text-3xl sm:text-4xl text-brand-maroon tracking-wide">
+              Noelle Cakes & Pastries
+            </span>
           </Link>
 
           {/* Desktop Navigation Links */}

@@ -1,3 +1,5 @@
+import { storeInfo } from '../../data/storeInfo';
+
 export default function FindUsSection() {
   return (
     <section id="find-us" className="bg-brand-pink py-16 px-4 sm:px-6 lg:px-8 scroll-mt-20 border-t border-brand-divider">
@@ -22,7 +24,21 @@ export default function FindUsSection() {
               </div>
               <div>
                 <h4 className="font-bold text-brand-maroon text-lg">Address</h4>
-                <p className="text-brand-muted text-sm">123 Bakery Lane, Suite A, Cake City, CA 90210</p>
+                <p className="text-brand-muted text-sm">
+                  {storeInfo.address.street}<br />
+                  {storeInfo.address.city}
+                </p>
+                <a 
+                  href={storeInfo.googleMapsLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-accent text-xs hover:underline inline-flex items-center gap-1 mt-1"
+                >
+                  Get Directions
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
               </div>
             </div>
 
@@ -34,22 +50,39 @@ export default function FindUsSection() {
               </div>
               <div>
                 <h4 className="font-bold text-brand-maroon text-lg">Operating Hours</h4>
-                <p className="text-brand-muted text-sm">Tuesday – Friday: 8:00 AM – 6:00 PM</p>
-                <p className="text-brand-muted text-sm">Saturday: 9:00 AM – 5:00 PM</p>
+                <p className="text-brand-muted text-sm">Tuesday – Friday: {storeInfo.hours.tueFri}</p>
+                <p className="text-brand-muted text-sm">Saturday: {storeInfo.hours.saturday}</p>
                 <p className="text-brand-muted text-sm font-medium mt-1">Closed Sunday & Monday</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4">
+              <div className="bg-brand-maroon text-brand-pink p-3 rounded-lg shadow-sm">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <h4 className="font-bold text-brand-maroon text-lg">Contact</h4>
+                <p className="text-brand-muted text-sm">{storeInfo.email}</p>
+                <p className="text-brand-muted text-sm">{storeInfo.phone}</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="rounded-xl overflow-hidden shadow-lg border border-brand-divider bg-white p-2 aspect-4/3 flex flex-col justify-center items-center text-center">
-          <div className="bg-brand-pink w-full h-full rounded-lg border border-dashed border-brand-maroon/30 flex flex-col justify-center items-center p-6">
-            <svg className="w-12 h-12 text-brand-maroon/60 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-            </svg>
-            <h4 className="font-heading text-2xl text-brand-maroon">Interactive Map</h4>
-            <p className="text-xs text-brand-muted mt-1 max-w-xs">Located conveniently near downtown Cake City with ample parking behind the shop.</p>
-          </div>
+        <div className="rounded-xl overflow-hidden shadow-lg border border-brand-divider bg-white p-2 aspect-4/3">
+          <iframe
+            src={storeInfo.googleMapsEmbedUrl}
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="strict-origin-when-cross-origin"
+            title="Noelle Cakes Location"
+            className="rounded-lg"
+          ></iframe>
         </div>
 
       </div>
