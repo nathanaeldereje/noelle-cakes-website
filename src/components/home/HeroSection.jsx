@@ -1,4 +1,4 @@
-import hero_image from '../../assets/hero.webp';
+import hero_image from '../../assets/hero_v2.webp';
 
 export default function HeroSection() {
   return (

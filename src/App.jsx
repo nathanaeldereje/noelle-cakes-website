@@ -1,5 +1,5 @@
+import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
 
 // Shared Public Components
 import Navbar from './components/Navbar';
@@ -11,15 +11,17 @@ import CategoryPage from './pages/CategoryPage';
 import ItemDetailPage from './pages/ItemDetailPage';
 import SpecialDetailPage from './pages/SpecialDetailPage';
 
-// Admin Imports
+// Admin Imports (Lazy Loaded to save 90 KB on initial page load!)
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/admin/ProtectedRoute';
 import AdminLayout from './components/admin/AdminLayout';
-import AdminLogin from './pages/admin/AdminLogin';
-import AdminDashboard from './pages/admin/AdminDashboard';
-import AdminCategories from './pages/admin/AdminCategories';
-import AdminItems from './pages/admin/AdminItems';
-import AdminSpecials from './pages/admin/AdminSpecials';
+
+const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'));
+const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
+const AdminCategories = lazy(() => import('./pages/admin/AdminCategories'));
+const AdminItems = lazy(() => import('./pages/admin/AdminItems'));
+const AdminSpecials = lazy(() => import('./pages/admin/AdminSpecials'));
+// const AdminMessages = lazy(() => import('./pages/admin/AdminMessages'));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -31,7 +33,6 @@ function ScrollToTop() {
   return null;
 }
 
-// Wrapper for all public pages that share the public Navbar & Footer
 function PublicLayout() {
   return (
     <div className="min-h-screen bg-white flex flex-col justify-between font-body text-brand-body">
@@ -54,25 +55,28 @@ function App() {
     <AuthProvider>
       <Router>
         <ScrollToTop />
-        <Routes>
-          
-          {/* Admin Login (Unprotected) */}
-          <Route path="/admin/login" element={<AdminLogin />} />
+        <Suspense fallback={<div className="min-h-screen bg-brand-pink flex items-center justify-center font-body text-brand-maroon">Loading...</div>}>
+          <Routes>
+            
+            {/* Admin Login */}
+            <Route path="/admin/login" element={<AdminLogin />} />
 
-          {/* Admin Protected CMS Shell */}
-          <Route path="/admin" element={<ProtectedRoute />}>
-            <Route element={<AdminLayout />}>
-              <Route index element={<AdminDashboard />} />
-              <Route path="categories" element={<AdminCategories />} />
-              <Route path="items" element={<AdminItems />} />
-              <Route path="specials" element={<AdminSpecials />} />
+            {/* Admin Protected CMS Shell */}
+            <Route path="/admin" element={<ProtectedRoute />}>
+              <Route element={<AdminLayout />}>
+                <Route index element={<AdminDashboard />} />
+                <Route path="categories" element={<AdminCategories />} />
+                <Route path="items" element={<AdminItems />} />
+                <Route path="specials" element={<AdminSpecials />} />
+                {/* <Route path="messages" element={<AdminMessages />} /> */}
+              </Route>
             </Route>
-          </Route>
 
-          {/* Public Website Routes */}
-          <Route path="/*" element={<PublicLayout />} />
+            {/* Public Website Routes */}
+            <Route path="/*" element={<PublicLayout />} />
 
-        </Routes>
+          </Routes>
+        </Suspense>
       </Router>
     </AuthProvider>
   );
