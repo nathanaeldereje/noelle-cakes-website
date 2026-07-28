@@ -25,6 +25,11 @@
 }
 
 /* --- TAILWIND V4 THEME --- */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
 @theme {
   --color-brand-maroon: #65001E;
   --color-brand-pink: #FFEBEB;

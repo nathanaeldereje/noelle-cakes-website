@@ -1,36 +1,44 @@
-import { useEffect, useState } from 'react'
-import { supabase } from './lib/supabase'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
-function App() {
-  const [status, setStatus] = useState('Connecting to Supabase...')
+// Pages
+import Home from './pages/Home';
+import CategoryPage from './pages/CategoryPage';
+import ItemDetailPage from './pages/ItemDetailPage';
+import SpecialDetailPage from './pages/SpecialDetailPage';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    async function testConnection() {
-      // Try to fetch categories from your new table
-      const { data, error } = await supabase.from('categories').select('*')
-      
-      if (error) {
-        console.error("Error connecting:", error)
-        setStatus('❌ Connection Failed! Check console.')
-      } else {
-        console.log("Supabase connected! Data:", data)
-        setStatus('✅ Supabase Connected Successfully!')
-      }
-    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [pathname]);
 
-    testConnection()
-  }, [])
-
-  return (
-    <div className="min-h-screen bg-brand-pink flex flex-col items-center justify-center p-8 text-center">
-      <h1 className="font-heading text-brand-maroon text-5xl mb-4">
-        Database Test
-      </h1>
-      <p className="font-body text-brand-body text-xl bg-white px-6 py-3 rounded-lg shadow-sm">
-        {status}
-      </p>
-    </div>
-  )
+  return null;
 }
 
-export default App
+function App() {
+  return (
+    <Router>
+      <ScrollToTop />
+      <div className="min-h-screen bg-white flex flex-col justify-between font-body text-brand-body">
+        <Navbar />
+
+        <main className="grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/menu/:category" element={<CategoryPage />} />
+            <Route path="/menu/:category/:item" element={<ItemDetailPage />} />
+            <Route path="/specials/:item" element={<SpecialDetailPage />} />
+          </Routes>
+        </main>
+
+        <Footer />
+      </div>
+    </Router>
+  );
+}
+
+export default App;
