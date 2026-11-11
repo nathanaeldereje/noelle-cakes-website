@@ -51,6 +51,20 @@ export default function Home() {
     fetchPublicHomeData();
   }, []);
 
+  // When data finishes loading, if URL has a hash, scroll to that section smoothly
+  useEffect(() => {
+    if (!loading && window.location.hash) {
+      const id = window.location.hash.replace('#', '');
+      const timer = setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 120);
+      return () => clearTimeout(timer);
+    }
+  }, [loading]);
+
   if (loading) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center font-body text-brand-maroon">
