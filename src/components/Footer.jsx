@@ -30,15 +30,15 @@ export default function Footer() {
           <div className="space-y-3">
             <h4 className="font-heading text-xl text-brand-accent">Bakery Hours</h4>
             <ul className="space-y-1 text-sm text-brand-pink/80">
-              <li className="flex justify-between max-w-50">
+              <li className="flex justify-between max-w-xs">
                 <span>Tue - Fri:</span> 
                 <span>{storeInfo.hours.tueFri}</span>
               </li>
-              <li className="flex justify-between max-w-50">
+              <li className="flex justify-between max-w-xs">
                 <span>Saturday:</span> 
                 <span>{storeInfo.hours.saturday}</span>
               </li>
-              <li className="flex justify-between max-w-50">
+              <li className="flex justify-between max-w-xs">
                 <span>Sun - Mon:</span> 
                 <span>{storeInfo.hours.sunMon}</span>
               </li>
@@ -53,8 +53,12 @@ export default function Footer() {
               {storeInfo.address.city}
             </p>
             <p className="text-sm text-brand-pink/80">
-              {storeInfo.email}<br />
-              {storeInfo.phone}
+              <a href={`mailto:${storeInfo.email}`} className="hover:text-white transition-colors block">
+                {storeInfo.email}
+              </a>
+              <a href={`tel:${storeInfo.phone}`} className="hover:text-white transition-colors block">
+                {storeInfo.phone}
+              </a>
             </p>
             {/* Google Maps Link */}
             <a 
@@ -74,16 +78,9 @@ export default function Footer() {
         </div>
 
         {/* Divider & Copyright */}
-        <div className="pt-8 border-t border-brand-pink/10 flex flex-col sm:flex-row justify-between items-center text-xs text-brand-pink/60 gap-4">
+        <div className="pt-8 border-t border-brand-pink/10 flex flex-col sm:flex-row justify-between items-center text-xs text-brand-pink/60 gap-3 text-center sm:text-left">
           <p>© {new Date().getFullYear()} Noelle Cakes. All rights reserved.</p>
-          
-          {/* Discreet Owner Login Link */}
-          <Link to="/admin/login" className="hover:text-brand-accent transition-colors flex items-center gap-1 opacity-70 hover:opacity-100">
-            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 002-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
-            Owner Login
-          </Link>
+          <p className="text-brand-pink/40">Handcrafted with love in Addis Ababa, Ethiopia</p>
         </div>
       </div>
     </footer>
