@@ -24,7 +24,7 @@ export default function StorySection() {
             From our famous multi-layered tortas filled with rich dulce de leche to handcrafted custom celebration cakes, every single creation is baked fresh using traditional methods and zero shortcuts.
           </p>
           <div className="pt-2">
-            <span className="font-accent text-3xl text-brand-maroon block">Noelle Something</span>
+            <span className="font-accent text-3xl text-brand-maroon block">Noelle ...</span>
             <span className="text-xs text-brand-muted uppercase tracking-wider">Founder & Master Baker</span>
           </div>
         </div>

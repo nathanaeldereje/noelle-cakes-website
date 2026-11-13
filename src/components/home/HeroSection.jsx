@@ -1,9 +1,23 @@
 import hero_image from '../../assets/hero_v2.webp';
+import pattern2 from '../../assets/pattern2.png';
 
 export default function HeroSection() {
   return (
-    <section id="home" className="relative bg-brand-pink py-16 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-24">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section id="home" className="relative bg-brand-pink py-16 lg:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-24 overflow-hidden">
+      
+      {/* Subtle single-sided pattern accent fading out from the right */}
+      <div 
+        className="absolute inset-y-0 right-0 w-full lg:w-7/12 opacity-70 mix-blend-multiply pointer-events-none bg-repeat"
+        style={{ 
+          backgroundImage: `url(${pattern2})`, 
+          backgroundSize: '240px 240px',
+          maskImage: 'linear-gradient(to left, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0) 85%)',
+          WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0) 85%)'
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         
         <div className="space-y-6 text-center lg:text-left">
           <div className="inline-flex items-center gap-2 bg-white px-3 py-1.5 rounded-full border border-brand-divider shadow-sm">
@@ -38,10 +52,10 @@ export default function HeroSection() {
         <div className="rounded-xl overflow-hidden shadow-lg border border-brand-divider aspect-4/3 max-w-md mx-auto lg:max-w-none w-full">
           <img 
             src={hero_image} 
-            alt="TODO: some random image of a cake or pastry"
+            alt="Artisan cake handcrafted by Noelle Cakes & Pastries"
             className="w-full h-full object-cover"
             loading="eager"
-            fetchpriority="high"
+            fetchPriority="high"
           />
         </div>
 
